@@ -23,26 +23,8 @@
 #include "../helpers/debug_helper.hpp"
 #include "../helpers/parse_helper.hpp"
 #include "../structs/server_config_struct.hpp"
+#include "../services/request_header_service.hpp"
 #include "../enums/validation_flag_result_enum.hpp"
-
-struct RequestHeader {
-  std::string method;
-  std::string endpoint;
-  std::string content;
-  std::string accept;
-  std::string content_type;
-  std::string content_length;
-
-  // Make deconstructor
-  ~RequestHeader() {
-    method = "";
-    endpoint = "";
-    content = "";
-    accept = "";
-    content_type = "";
-    content_length = "";
-  }
-};
 
 namespace http {
   class TCPServer {
@@ -354,7 +336,8 @@ namespace http {
 
           RequestHeader header = getRequestHeader(buffer);
 
-          if (header.method.empty()) {
+          if (header.is_empty()) {
+            header.fill_empty();
             debug::quit("Failed to parse request header.");
           }
 

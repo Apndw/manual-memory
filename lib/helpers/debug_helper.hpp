@@ -5,6 +5,8 @@
 
 #include <iostream>
 
+#include "../structs/app_config_struct.hpp"
+
 namespace debug {
   static void print(const std::string &message) {
     std::cout << message << std::endl;
@@ -12,7 +14,11 @@ namespace debug {
 
   static void quit(const std::string &message) {
     print("ERROR: " + message);
-    exit(1);
+
+    if (AppConfig::environment == AppEnvironment::DEVELOPMENT) {
+      print("Exiting...");
+      exit(1);
+    }
   }
 }
 

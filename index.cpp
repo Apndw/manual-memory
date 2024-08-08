@@ -1,4 +1,5 @@
 #include "lib/handlers/http_server.hpp"
+#include "lib/structs/app_config_struct.hpp"
 #include "lib/structs/server_config_struct.hpp"
 
 int main() {
