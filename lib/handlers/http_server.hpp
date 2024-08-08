@@ -14,6 +14,7 @@
 #ifdef _WIN32
   #include <winsock.h>
 #else
+  #include <cstring>
   #include <unistd.h>
   #include <arpa/inet.h>
   #include <sys/socket.h>
